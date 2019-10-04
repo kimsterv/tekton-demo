@@ -1,19 +1,21 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: deploy
 spec:
- inputs:
+  inputs:
    resources:
      - name: image
        type: image
-steps:
-   - name: run
-     image: gcr.io/cloud-builders/gcloud
-     args:
-       - beta
-       - run
-       - deploy
-       - default
-       - --image=${inputs.resources.image.url}
-       - --region=us-central1
-       - --platform=managed
-       - --allow-unauthenticated
-
-
+  steps:
+    - name: run
+      image: gcr.io/cloud-builders/gcloud
+      args:
+        - beta
+        - run
+        - deploy
+        - default
+        - --image=$(inputs.resources.image.url)
+        - --region=us-central1
+        - --platform=managed
+        - --allow-unauthenticated

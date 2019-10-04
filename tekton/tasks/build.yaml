@@ -26,10 +26,10 @@ spec:
       image: gcr.io/kaniko-project/executor
       env:
         - name: "DOCKER_CONFIG"
-        value: "/builder/home/.docker/"
+          value: "/builder/home/.docker/"
       command:
         - /kaniko/executor
       args:
         - --dockerfile=/home/klewandowski/tekton-demo/Dockerfile
-        - --destination=${outputs.resources.image.url}
+        - --destination=$(outputs.resources.image.url)
         - --context=/home/klewandowski/tekton-demo
