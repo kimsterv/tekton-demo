@@ -1,0 +1,33 @@
+spec:
+ inputs:
+   resources:
+     - name: git
+       type: git
+steps:
+     # The name of the step
+   - name: pytest
+     image: python
+     command:
+       - /bin/bash
+       - -c
+     args:
+       # Changes to the app/ directory, installs required dependencies, and run all
+       # the tests with pytest
+       - cd /workspace/git/getting-started/app && pip3 install -r requirements.txt && pip3 install -r dev_requirements.txt && pytest .
+     outputs:
+       resources:
+         - name: image
+         type: image
+   - name: kaniko
+      image: gcr.io/kaniko-project/executor
+      env:
+        - name: DOCKER_CONFIG
+        value: /builder/home/.docker/
+      command:
+        - /kaniko/executor
+      args:
+        - --dockerfile=/workspace/git/getting-started/Dockerfile
+        - --destination=${outputs.resources.image.url}
+        - --context=/workspace/git/getting-started
+
+
