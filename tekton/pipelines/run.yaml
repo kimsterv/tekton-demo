@@ -5,6 +5,7 @@ metadata:
 spec:
   pipelineRef:
     name: build-test-deploy-app-pipeline
+  serviceAccount: tekton
   resources:
     - name: git
       resourceRef:
