@@ -11,15 +11,15 @@ spec:
       - name: dockerfilePath
         type: string
         description: The path to the dockerfile
-        default: /workspace/git/tekton-demo/Dockerfile
+        default: /workspace/git/Dockerfile
       - name: srcPath
         type: string
         description: The path to the source code
-        default: /workspace/git/tekton-demo/app
+        default: /workspace/git/app
       - name: kanikoContextPath
         type: string
         description: Kaniko build context
-        default: /workspace/git/tekton-demo
+        default: /workspace/git
   outputs:
     resources:
       - name: image
